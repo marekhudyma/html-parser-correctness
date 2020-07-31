@@ -10,11 +10,10 @@ public class LagartoHtmlParser implements HtmlParser {
     @Override
     public List<CharSequence> parse(CharSequence html) {
 
-        LagartoParser lagartoParser = new LagartoParser(html.toString());
-        LagartoParserConfig config = new LagartoParserConfig();
-        config.setEnableConditionalComments(false);
-        config.setEnableRawTextModes(false);
-        lagartoParser.setConfig(config);
+        LagartoParserConfig config = new LagartoParserConfig()
+                .setEnableConditionalComments(false)
+                .setEnableRawTextModes(false);
+        LagartoParser lagartoParser = new LagartoParser(config, html);
         TagVisitorImpl tagVisitor = new TagVisitorImpl();
         lagartoParser.parse(tagVisitor);
         return tagVisitor.getLinks();
